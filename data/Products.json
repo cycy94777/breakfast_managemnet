@@ -1,0 +1,11 @@
+{"Products":[
+    {"ProductCategory":"吐司類", "Name":"火腿蛋吐司", "Price": 25, 
+    "AddOnCategories":["吐司調味", "餐點加料"],
+    "IsDisplay":"是" },
+    {"ProductCategory":"蛋餅類", "Name":"火腿蛋餅", "Price": 30, 
+    "AddOnCategories":["蛋餅調味", "餐點加料"],
+    "IsDisplay":"是" },
+    {"ProductCategory":"飲料類", "Name":"紅茶", "Price": 15, 
+    "AddOnCategories":["飲料溫度", "飲料大小"],
+    "IsDisplay":"是" }
+]}

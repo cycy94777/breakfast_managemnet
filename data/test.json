@@ -1,0 +1,20 @@
+[
+    {
+        "orderId": 1,
+        "orderDate": "2024-09-01T00:00:00",
+        "memberId": 1001,
+        "totalAmount": 50.00
+    },
+    {
+        "orderId": 2,
+        "orderDate": "2024-09-02T00:00:00",
+        "memberId": 1002,
+        "totalAmount": 75.00
+    },
+    {
+        "orderId": 3,
+        "orderDate": "2024-09-03T00:00:00",
+        "memberId": 1003,
+        "totalAmount": 60.00
+    }
+]

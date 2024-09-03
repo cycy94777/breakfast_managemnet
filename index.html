@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>早餐店後台系統</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4ac8f2d444.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <!-- 側邊欄 -->
+        <div class="sidebar">
+            <nav class="nav flex-column">
+                <div class="nav-item">
+                    <a class="nav-link active" href="#" id="home-link">首頁</a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="#" id="account">商店管理</a> 
+                </div>
+                <div class="nav-item nested-menu">
+                    <a class="nav-link toggle-submenu" href="javascript:void(0);">商品管理</a>
+                    <div class="submenu-wrapper">
+                        <div class="submenu">
+                            <a class="nav-link" href="#" id="ProductCategory">商品類別管理</a>
+                            <a class="nav-link" href="#" id="Product">商品資訊管理</a>
+                            <a class="nav-link" href="#" id="AddOnCategory">加選類別管理</a>
+                            <a class="nav-link" href="#" id="AddOnOption">加選資訊管理</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item nested-menu">
+                    <a class="nav-link toggle-submenu" href="javascript:void(0);">會員管理</a>
+                    <div class="submenu-wrapper">
+                        <div class="submenu">
+                            <a class="nav-link" href="#" id="memberDetail">會員明細</a>
+                            <a class="nav-link" href="#" id="blackList">黑名單管理</a>
+                            <a class="nav-link" href="#" id="pointDetail">會員點數明細</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item nested-menu">
+                    <a class="nav-link toggle-submenu" href="javascript:void(0);">營業報告</a>
+                    <div class="submenu-wrapper">
+                        <div class="submenu">
+                            <a class="nav-link" href="#" id="operationSummary">營業概況</a>
+                            <a class="nav-link" href="#" id="operationGraph">營業趨勢圖</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="#" id="orderList">訂單列表</a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- 頂部欄 -->
+        <div class="top-bar">
+            <div class="greeting">Hi,xxx早餐店</div>
+            <div class="user-icon" style="background-color: #d3d3d3">
+                <!-- 圖標，可以在這裡使用圖片或 FontAwesome 圖標 -->
+                <i class="fa-solid fa-door-open" style="color:rgba(39, 38, 38, 0.869);"></i>
+            </div>
+        </div>
+
+        <!-- 主內容區塊 -->
+        <div class="main-content-wrapper">
+            <!-- 主內容的白色區塊 -->
+            <div class="main-content" id="main-content">
+                <h1>首頁內容</h1>
+                <p>這裡是首頁的內容展示區域。</p>
+            </div>
+        </div>
+    </div>
+    <script src="function.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

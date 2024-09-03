@@ -1,0 +1,11 @@
+{"AddOnOptions":[
+    {"AddOnCategories":"吐司調味","AddOnName":"微烤", "Price":0},
+    {"AddOnCategories":"吐司調味","AddOnName":"不醬", "Price":0},
+    {"AddOnCategories":"飲料溫度","AddOnName":"冰", "Price":0},
+    {"AddOnCategories":"飲料溫度","AddOnName":"熱", "Price":0},
+    {"AddOnCategories":"餐點加料","AddOnName":"加漢堡肉+25", "Price":25},
+    {"AddOnCategories":"餐點加料","AddOnName":"加蛋+15", "Price":15}
+    
+
+]}
+
