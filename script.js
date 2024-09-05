@@ -143,10 +143,10 @@ function loadContent(contentId) {
             loadPointsDetails();
             break;
         case 'operationSummary':
-            mainContent.innerHTML = `<h1>營業概況</h1><p>這裡是營業概況的內容展示區域。</p>`;
+            loadOperationSummary();
             break;
         case 'operationGraph':
-            mainContent.innerHTML = `<h1>營業趨勢圖</h1><p>這裡是營業趨勢圖的內容展示區域。</p>`;
+            loadOperationGraph();
             break;
         case 'orderList':
             loadOrderList();

@@ -969,24 +969,318 @@ function loadOperationSummary(){
     .then(response => response.json())
     .then(data => {
         const mainContent = document.querySelector('.main-content');
-        mainContent.innerHTML= `<h3>營業概況</h3>`;})
+        mainContent.innerHTML= `
+        <h3>營業概況</h3>
+        <div class="container">
+            <div class="header">
+                
+                <div class="date-range d-flex align-items-center">
+                <!-- 開始日期 -->
+                    <div class="d-flex align-items-center me-2">
+                        <label for="startDate" class="mb-0 me-1" style="margin-right: 0.5rem;">開始日期: </label>
+                        <input type="date" id="startDate" class="form-control" aria-label="Start Date" style="flex: 1;">
+                    </div>
+
+                    <!-- 結束日期 -->
+                    <div class="d-flex align-items-center me-2">
+                        <label for="endDate" class="mb-0 me-1" style="margin-right: 0.5rem;">結束日期: </label>
+                        <input type="date" id="endDate" class="form-control" aria-label="End Date" style="flex: 1;">
+                    </div>
+                    <button class="btn btn-light" type="button">搜尋</button>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                    <p>總營業額</p>
+                    <h3>$30,000</h3>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-receipt"></i>
+                    <p>總訂單數</p>
+                    <h3>480</h3>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-regular fa-user"></i>
+                    <p>訂購會員數</p>
+                    <h3>36</h3>
+                </div>
+            </div>
+        </div>
+        `
+        mainContent.innerHTML += `
+        <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .date-range input {
+            margin: 0 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .date-range button {
+            padding: 6px 12px;
+            background-color: #e6e6e6;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: #A2A2A2  !important;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px; /* Added padding */
+            background-color: #f1f1f1; /* Light grey background for the stats container */
+            border-radius: 10px; /* Rounded corners for the stats container */
+            height: 300px; 
+        }
+        
+        .stat-item {
+            flex: 1;
+            text-align: center;
+            padding: 50px 20px; /* Increased padding */
+            border-radius: 10px; /* Rounded corners */
+            margin: 0 22px; /* Spacing between items */
+            background-color: #ffffff;
+            
+            
+        }
+        
+        /* Horizontal line between p and h3 */
+        .stat-item p::after {
+            content: "";
+            display: block;
+            width: 50%; /* Adjusts the length of the line */
+            height: 3px;
+            background-color: #ddd; /* Light grey line */
+            margin: 10px auto; /* Center the line and add spacing */
+        }
+        
+        .stat-item i {
+            font-size: 36px;
+            
+            margin-bottom: 10px;
+        }
+        
+        .stat-item h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+        
+        .stat-item p {
+            margin: 0;
+            font-size: 16px;
+            color: #777;
+        }
+
+        .fa-sack-dollar {
+            color: #f0ad4e;
+        }
+
+        .fa-receipt{
+            color: #C2D1DF;
+        }
+
+        .fa-user{
+            color: #C2DFDB;
+        }
+    
+        </style>`;
+        
+        ;})
     .catch(error => {
             console.error('Error fetching the orders:', error);
     });
   
 };
 // 營業報告 - 營業趨勢圖
-function loadOperationGraph(){
-    fetch("./data/StaticsMonth.json")
-    .then(response => response.json())
-    .then(data => {
-        const mainContent = document.querySelector('.main-content');
-        mainContent.innerHTML= `<h3>營業趨勢圖</h3>`;})
-    .catch(error => {
-            console.error('Error fetching the orders:', error);
-    });
-   
-};
+// function loadOperationGraph() {
+//     fetch("./data/StaticsMonth.json")
+//         .then(response => response.json())
+//         .then(data => {
+//             const mainContent = document.querySelector('.main-content');
+//             mainContent.innerHTML = `
+            
+//             <h3>營業趨勢圖</h3>
+//             <div class="container">
+//                 <div class="header">
+//                     <div class="date-range d-flex align-items-center">
+//                         <!-- 開始日期 -->
+//                         <div class="d-flex align-items-center me-2">
+//                             <label for="startDate" class="mb-0 me-1" style="margin-right: 0.5rem;">開始日期: </label>
+//                             <input type="date" id="startDate" class="form-control" aria-label="Start Date" style="flex: 1;">
+//                         </div>
+
+//                         <!-- 結束日期 -->
+//                         <div class="d-flex align-items-center me-2">
+//                             <label for="endDate" class="mb-0 me-1" style="margin-right: 0.5rem;">結束日期: </label>
+//                             <input type="date" id="endDate" class="form-control" aria-label="End Date" style="flex: 1;">
+//                         </div>
+//                         <button class="btn btn-light" type="button">搜尋</button>
+//                     </div>
+//                 </div>
+//                 <div class="graphs">
+//                     <div class="graph-item">
+//                         <i class="fa-solid fa-sack-dollar"><span class="text">營業額</span></i>
+//                         <div id="bar-container">
+//                             <canvas id="salesBar"></canvas>
+//                         </div>
+//                     </div>
+//                     <div class="graph-item">
+//                         <i class="fa-solid fa-user"><span>會員數</span></i>
+//                     </div>
+//                     <div class="graph-item">
+//                         <i class="fa-solid fa-burger"><span>商品數</span></i>
+//                     </div>
+//                 </div>
+//             </div>
+//             <style>
+//                 .header {
+//                     display: flex;
+//                     justify-content: space-between;
+//                     align-items: center;
+//                     padding-bottom: 10px;
+//                     margin-bottom: 20px;
+//                 }
+
+//                 .date-range input {
+//                     margin: 0 5px;
+//                     padding: 5px;
+//                     border: 1px solid #ccc;
+//                     border-radius: 4px;
+//                 }
+
+//                 .date-range button {
+//                     padding: 6px 12px;
+//                     background-color: #e6e6e6;
+//                     border: none;
+//                     border-radius: 4px;
+//                     cursor: pointer;
+//                     color: #A2A2A2  !important;
+//                 }
+
+//                 .graphs {
+//                     display: flex;
+//                     justify-content: space-between;
+//                     padding: 14px;
+//                     background-color: #f1f1f1;
+//                     border-radius: 10px;
+//                     height: 350px;
+//                 }
+
+//                 .graph-item {
+//                     flex: 1;
+//                     text-align: center;
+//                     padding: 10px;
+//                     border-radius: 10px;
+//                     margin: 0 15px;
+//                     background-color: #ffffff;
+//                 }
+
+//                 .graph-item i {
+//                     font-size: 22px;
+//                     margin-bottom: 10px;
+//                 }
+
+//                 .graph-item .text {
+//                     margin-left: 0.5rem;
+//                 }
+
+//                 .fa-sack-dollar {
+//                     color: #f0ad4e;
+//                 }
+
+//                 .fa-burger {
+//                     color: #F4BECB;
+//                 }
+
+//                 .fa-user {
+//                     color: #C2DFDB;
+//                 }
+
+//                 #bar-container {
+//                     width: 100%; /* 確保圖表容器適合父容器 */
+//                     height: 100%; /* 確保圖表容器適合父容器 */
+//                     margin: 0 auto;
+//                     position: relative;
+//                 }
+
+//                 #salesBar {
+//                     width: 100% !important;
+//                     height: 100% !important;
+//                 }
+//             </style>
+            
+//             <script>
+//                 document.addEventListener('DOMContentLoaded', function() {
+//                     var ctx = document.getElementById('salesBar').getContext('2d');
+//                     var myChart = new Chart(ctx, {
+//                         type: 'bar',
+//                         data: {
+//                             labels: ['1月', '2月', '3月', '4月'],
+//                             datasets: [{
+//                                 data: [4500, 5200, 5000, 4780],
+//                                 backgroundColor: [
+//                                     'rgba(221, 205, 138, 0.8)'
+//                                 ],
+//                                 borderColor: [
+//                                     'rgba(255, 99, 132, 1)'
+//                                 ],
+//                                 borderWidth: 0
+//                             }]
+//                         },
+//                         options: {
+//                             responsive: true,  // 讓圖表自動調整大小
+//                             maintainAspectRatio: false,  // 讓圖表能夠根據容器調整大小
+//                             plugins: {
+//                                 legend: {
+//                                     display: false
+//                                 }
+//                             },
+//                             scales: {
+//                                 x: {
+//                                     grid: {
+//                                         display: false
+//                                     }
+//                                 },
+//                                 y: {
+//                                     grid: {
+//                                         display: false
+//                                     },
+//                                     beginAtZero: true,
+//                                     ticks: {
+//                                         stepSize: 500,
+//                                         callback: function(value) {
+//                                             return value;
+//                                         }
+//                                     },
+//                                     min: 3000,
+//                                     max: 5500
+//                                 }
+//                             }
+//                         }
+//                     });
+//                 });
+//             </script>
+//             `;
+//         })
+//         .catch(error => {
+//             console.error('Error fetching the data:', error);
+//         });
+// }
+
+
+
 // 訂單列表
 function loadOrderList() {
     fetch("./data/OrderList.json")

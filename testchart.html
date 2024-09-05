@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bar Chart Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4ac8f2d444.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+</head>
+<style>
+    #bar-container {
+        width: 200px;
+        height: 250px;
+    }
+</style>
+<body>
+    <div id="bar-container">
+    <canvas id="salesBar" width="50" height="50"></canvas>
+    </div>
+    <script>
+        var ctx = document.getElementById('salesBar').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['1月', '2月', '3月', '4月'],
+                datasets: [{
+                    // label: '# of Votes',
+                    data: [4500, 5200, 5000, 4780],
+                    backgroundColor: [
+                        'rgba(221, 205, 138, 0.8)'
+                        
+                        
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)'
+                        
+                        
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: {
+                legend: {
+                display: false}},
+                scales: {
+                    x:{grid:{display:false}},
+                    y: {
+                        grid:{display:false},
+                        beginAtZero: false,
+                        ticks: {
+                            stepSize: 500, // Set the interval between y-axis ticks
+                            callback: function(value) {
+                                return value; // Display the tick values as is
+                            }
+                        },
+                        min: 3000,
+                        max: 5500
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
