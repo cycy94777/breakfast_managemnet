@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改加選類別</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        .modal-style {
+            border: 3px solid #999999; /* Gray border color */
+            /* border-radius: 10px; */
+        }
+
+        .modal-content {
+            border: 20px solid #999999 !important; /* Border thickness and color */
+            /* border-radius: 10px !important; Consistent rounded corners */
+        }
+
+        /* Custom width and alignment for the label */
+        .form-label-custom {
+            width: 150px; /* Adjust this width if needed */
+            text-align: right;
+            font-weight: bold;
+            margin-right: 20px;
+            
+        }
+
+        .form-control {
+            background-color: #cdcdcd;
+        }
+
+        /* Flex container to ensure correct alignment */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ensure each form-group and radio-group is on its own line */
+        .form-group,
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px; /* Spacing between rows */
+        }
+
+        .radio-group {
+            margin-left: 44px; }/* Align radio-group to start at the same position as label
+        
+
+        /* Increase space between the header and the main content */
+        .modal-body {
+            padding-top: 20px; /* Adjust this value to increase space between the header and content */           
+            padding-bottom: 7px;        
+        }
+
+        .modal-header {
+            padding-bottom: 0; /* Remove bottom padding to reduce space above form */
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            border-top: none; /* Remove the top border */
+            box-shadow: none; /* Remove any box-shadow if present */
+            padding-top: 0;
+
+        }
+
+        .form-check-label{
+            font-weight: bold;
+        }
+        .form-check {
+            margin-right: 10px; /* Space between radio options */
+        }
+
+        .form-check-input:checked {
+            background-color: grey; /* Change the background color of the checked radio button */
+            border-color: grey; /* Change the border color of the checked radio button */
+        }
+
+        /* Optional: Adjust color for focus state (not necessary if you only want grey when checked) */
+        .form-check-input:focus {
+            box-shadow: 0 0 0 0.25rem rgba(128, 128, 128, 0.25); /* Adjust this for focus state */
+        }
+        
+        /* Style for the save button */
+        .modal-footer button {
+            width: 100px;
+        }
+
+        .btn-secondary {
+            background-color: #cdcdcd;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="row mt-3">
+        <div class="col-6"></div>
+        <div class="col-6">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                修改
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade modal-style" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="staticBackdropLabel">修改加選類別</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-container">
+                        <div class="form-group">
+                            <label for="addOnName" class="col-form-label form-label-custom">加選類別名稱:</label>
+                            <input type="text" class="form-control" id="addOnName" style="width: auto;"placeholder="吐司調味">
+                        </div>
+                        <div class="radio-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">單選</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">複選</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer" style="justify-content: center;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">儲存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</body>
+</html>
