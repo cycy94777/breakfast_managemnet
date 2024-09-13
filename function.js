@@ -250,7 +250,7 @@ function loadProductCategories() {
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between">
                             <!-- 左側的按鈕 -->
-                            <button style="background-color: #ccc">新增商品類別</button>
+                            <button style="background-color: #ccc" id="showModalBtn">新增商品類別</button>
 
                             <!-- 右側的搜索框和按鈕 -->
                             <div class="d-flex align-items-center">
@@ -258,7 +258,7 @@ function loadProductCategories() {
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </span>
-                                    <input type="text" class="form-control" placeholder="請輸入內容" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="請輸入內容" style="background-color:white;" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                                 <button class="btn btn-light" type="button">搜尋</button>
                             </div>
@@ -297,6 +297,11 @@ function loadProductCategories() {
                 </nav>
             </div>`;
 
+            // Add event listener to the button
+            document.getElementById('showModalBtn').addEventListener('click', function() {
+                loadModal('AddProductCategroyM.html', 'staticBackdrop');
+            });
+
             const tbody = document.getElementById('categoryTableBody');
             data.ProductCategories.forEach(name => {
                 const row = document.createElement('tr');
@@ -305,7 +310,7 @@ function loadProductCategories() {
 
                 const operate = document.createElement('td');
                 operate.innerHTML = `
-                <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
+                <a class="btn btn-light edit-btn" style="color:#A9A9A9" href="#!" role="button">
                     <i class="fa-solid fa-pen-to-square"></i>
                 修改
                 </a>
@@ -318,6 +323,13 @@ function loadProductCategories() {
                 row.appendChild(operate);
 
                 tbody.appendChild(row);
+            });
+            // Add event listeners to all "edit" buttons
+            document.querySelectorAll('.edit-btn').forEach((btn, index) => {
+                btn.addEventListener('click', function() {
+                    // Load the ModifyProductM.html modal for the clicked product
+                    loadModal('ModifyProductCategory.html', 'staticBackdrop');
+                });
             });
 
         })
@@ -341,7 +353,7 @@ function loadProducts(){
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between">
                             <!-- 左側的按鈕 -->
-                            <button style="background-color: #ccc">新增商品資訊</button>
+                            <button style="background-color: #ccc" id="showModalBtn">新增商品資訊</button>
 
                             <!-- 右側的搜索框和按鈕 -->
                             <div class="d-flex align-items-center">
@@ -393,44 +405,60 @@ function loadProducts(){
             </nav>
         </div>`;
 
+        // Add event listener to the button
+        document.getElementById('showModalBtn').addEventListener('click', function() {
+            loadModal('AddProductM.html', 'staticBackdrop');
+        });
+
         const tbody = document.getElementById('productTableBody');
-                data.Products.forEach(product => {
-                    const row = document.createElement('tr');
-                    const category = document.createElement('td');
-                    category.innerText = product.ProductCategory;
+        data.Products.forEach(product => {
+            const row = document.createElement('tr');
+            const category = document.createElement('td');
+            category.innerText = product.ProductCategory;
 
-                    const name = document.createElement('td');
-                    name.innerText = product.Name;
+            const name = document.createElement('td');
+            name.innerText = product.Name;
 
-                    const price = document.createElement('td');
-                    price.innerText = product.Price;
-                    const isDisplay = document.createElement('td');
-                    isDisplay.innerText = product.IsDisplay;
-                    const addOnCategories = document.createElement('td');
-                    addOnCategories.innerText = product.AddOnCategories;
-                    
+            const price = document.createElement('td');
+            price.innerText = product.Price;
+            const isDisplay = document.createElement('td');
+            isDisplay.innerText = product.IsDisplay;
+            const addOnCategories = document.createElement('td');
+            addOnCategories.innerText = product.AddOnCategories;
+            
 
-                    const operate = document.createElement('td');
-                    operate.innerHTML = `
-                    <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    
-                    </a>
-                    <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
-                    <i class="fa-solid fa-trash"></i>
-                    
-                    </a>`;
+            const operate = document.createElement('td');
+            operate.innerHTML = `
+            <a class="btn btn-light edit-btn" style="color:#A9A9A9" href="#!" role="button">
+                <i class="fa-solid fa-pen-to-square"></i>
+            
+            </a>
+            <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
+            <i class="fa-solid fa-trash"></i>
+            
+            </a>`;
 
-                    row.appendChild(category);
-                    row.appendChild(name);
-                    row.appendChild(price);
-                    row.appendChild(isDisplay);
-                    row.appendChild(operate);
-                    row.appendChild(addOnCategories);
+            
 
-                    tbody.appendChild(row);
-                });
-        ;})
+            row.appendChild(category);
+            row.appendChild(name);
+            row.appendChild(price);
+            row.appendChild(isDisplay);
+            row.appendChild(operate);
+            row.appendChild(addOnCategories);
+
+            tbody.appendChild(row);
+            
+        });
+        // Add event listeners to all "edit" buttons
+        document.querySelectorAll('.edit-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                // Load the ModifyProductM.html modal for the clicked product
+                loadModal('ModifyProductM.html', 'staticBackdrop');
+            });
+        });
+
+    })
     .catch(error => {
             console.error('Error fetching the orders:', error);
     });
@@ -449,7 +477,7 @@ function loadAddOnCategories(){
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between">
                             <!-- 左側的按鈕 -->
-                            <button style="background-color: #ccc">新增加選類別</button>
+                            <button style="background-color: #ccc" id="showModalBtn" >新增加選類別</button>
 
                             <!-- 右側的搜索框和按鈕 -->
                             <div class="d-flex align-items-center">
@@ -498,33 +526,46 @@ function loadAddOnCategories(){
             </nav>
         </div>`;
 
+        // Add event listener to the button
+        document.getElementById('showModalBtn').addEventListener('click', function() {
+            loadModal('AddAddOnCategoryM.html', 'staticBackdrop');
+        });
+
         const tbody = document.getElementById('addOnCategoryTableBody');
-                data.AddOnCategories.forEach(category => {
-                    const row = document.createElement('tr');
+        data.AddOnCategories.forEach(category => {
+            const row = document.createElement('tr');
 
-                    const name = document.createElement('td');
-                    name.innerText = category.Name;
+            const name = document.createElement('td');
+            name.innerText = category.Name;
 
-                    const option = document.createElement('td');
-                    option.innerText = category.Option;
+            const option = document.createElement('td');
+            option.innerText = category.Option;
 
-                    const operate = document.createElement('td');
-                    operate.innerHTML = `
-                    <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    修改
-                    </a>
-                    <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
-                    <i class="fa-solid fa-trash"></i>
-                    刪除
-                    </a>`;
+            const operate = document.createElement('td');
+            operate.innerHTML = `
+            <a class="btn btn-light edit-btn" style="color:#A9A9A9" href="#!" role="button">
+                <i class="fa-solid fa-pen-to-square"></i>
+            修改
+            </a>
+            <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
+            <i class="fa-solid fa-trash"></i>
+            刪除
+            </a>`;
 
-                    row.appendChild(name);
-                    row.appendChild(option);
-                    row.appendChild(operate);
+            row.appendChild(name);
+            row.appendChild(option);
+            row.appendChild(operate);
 
-                    tbody.appendChild(row);
-                });
+            tbody.appendChild(row);
+        });
+
+        // Add event listeners to all "edit" buttons
+        document.querySelectorAll('.edit-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                // Load the ModifyProductM.html modal for the clicked product
+                loadModal('ModifyAddOnCategoryM.html', 'staticBackdrop');
+            });
+        });
     
     })
     .catch(error => {
@@ -546,7 +587,7 @@ function loadAddOnOptions() {
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between">
                             <!-- 左側的按鈕 -->
-                            <button style="background-color: #ccc">新增加選資訊</button>
+                            <button style="background-color: #ccc" id="showModalBtn">新增加選資訊</button>
 
                             <!-- 右側的搜索框和按鈕 -->
                             <div class="d-flex align-items-center">
@@ -595,6 +636,11 @@ function loadAddOnOptions() {
                 </nav>
             </div>`;
 
+                // Add event listener to the button
+            document.getElementById('showModalBtn').addEventListener('click', function() {
+                loadModal('AddAddOnOptionM.html', 'staticBackdrop');
+            });
+
             const tbody = document.getElementById('addOnTableBody');
             data.AddOnOptions.forEach(addOn => {
                 const row = document.createElement('tr');
@@ -610,7 +656,7 @@ function loadAddOnOptions() {
 
                 const operate = document.createElement('td');
                 operate.innerHTML = `
-                <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
+                <a class="btn btn-light edit-btn" style="color:#A9A9A9" href="#!" role="button">
                     <i class="fa-solid fa-pen-to-square"></i>
                 修改
                 </a>
@@ -625,6 +671,14 @@ function loadAddOnOptions() {
                 row.appendChild(operate);
 
                 tbody.appendChild(row);
+            });
+
+            // Add event listeners to all "edit" buttons
+            document.querySelectorAll('.edit-btn').forEach((btn, index) => {
+                btn.addEventListener('click', function() {
+                    // Load the ModifyProductM.html modal for the clicked product
+                    loadModal('ModifyAddOnOptionM.html', 'staticBackdrop');
+                });
             });
         })
         .catch(error => {
@@ -1391,7 +1445,7 @@ function loadOrderList() {
 
             const operate = document.createElement('td');
             operate.innerHTML = `
-            <a class="btn btn-light" style="color:#9BA2A8; width: 80px; height: 30px; font-size: 12px; padding: 0; border-color:#CCD3DA  ; display: inline-flex; align-items: center; justify-content: center;" href="#!" role="button">
+            <a class="btn btn-light edit-btn" style="color:#9BA2A8; width: 80px; height: 30px; font-size: 12px; padding: 0; border-color:#CCD3DA  ; display: inline-flex; align-items: center; justify-content: center;" href="#!" role="button">
     <i class="fa-solid fa-circle-info" style="font-size: 14px; margin-right: 3px;"></i> 明細
 </a>`;
 
@@ -1419,11 +1473,151 @@ function loadOrderList() {
             }
             tbody.appendChild(emptyRow);
         }
+
+        // Add event listeners to all "edit" buttons
+        document.querySelectorAll('.edit-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                // Load the ModifyProductM.html modal for the clicked product
+                loadModal('OrderDetailM.html', 'staticBackdrop');
+            });
+        });
     })
     .catch(error => {
         console.error('Error fetching the orders:', error);
     });
 }
 
+// a function for loading modal content:
+function loadModal(url, modalId) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('modal-container').innerHTML = data;
+            const modal = new bootstrap.Modal(document.getElementById(modalId));
+            modal.show();
+
+            // 在模態框內容加載後綁定按鈕事件
+            bindModalEvents();
+        })
+        .catch(error => console.error('Error loading modal:', error));
+}
 
 
+function bindModalEvents(){
+    $(document).on('click', '.btn-delete', function() {
+        console.log('Delete button clicked'); // 確認按鈕被點擊
+        console.log('Parent element:', $(this).parent()); // 確認要移除的父元素
+
+        $(this).parent().remove(); // 移除父元素
+        console.log('Parent element removed'); // 確認已經移除
+
+        updateAddonClasses();  // 更新類別
+        console.log('Addon classes updated'); // 確認更新
+    });
+
+
+    $(document).ready(function() {
+        // 綁定「新增」按鈕的點擊事件
+        $('#addOnbtn').on('click', function() {
+            const dropdown = $('#dropdownMenu2');
+            const selectedOptionText = dropdown.find('option:selected').text();
+            const selectedOptionValue = dropdown.val();
+    
+            if (selectedOptionValue === "請選擇") {
+                alert('請先選擇加選類別!');
+                return;
+            }
+    
+            // 呼叫 addNewItem 函數
+            addNewItem(selectedOptionText, selectedOptionValue);
+        });
+    });
+
+
+    $(document).ready(function() {
+        // 處理文件輸入點擊
+        $('#upload-img-btn').on('click', function() {
+            $('#upload-img').click(); // 觸發文件輸入點擊
+        });
+    
+        // 文件輸入變更事件處理選擇的文件
+        $('#upload-img').on('change', function(event) {
+            const file = event.target.files[0]; // 獲取選擇的文件
+            const previewContainer = $('.image-preview-container'); // 確保這個容器是分開的，不會與其他內容重疊
+    
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // 清除任何現有的圖像預覽
+                    previewContainer.empty(); 
+    
+                    // 創建新的圖像元素並設置其源為文件數據 URL
+                    const imgPreview = $('<img>').attr('src', e.target.result)
+                                                 .css({
+                                                    'max-width': '100%', // 確保圖像適合其容器
+                                                    'margin-top': '10px'  // 圖像上方的空間
+                                                 });
+    
+                    // 將新圖像添加到容器中
+                    previewContainer.append(imgPreview);
+                };
+                reader.readAsDataURL(file); // 將文件讀取為數據 URL
+            }
+        });
+    });
+    
+}
+
+function updateAddonClasses() {
+    const addonItems = document.querySelectorAll('.addon-item');
+    addonItems.forEach((item, index) => {
+        item.classList.remove('AddOn1', 'AddOn2');
+        if (index % 2 === 0) {
+            item.classList.add('AddOn1');
+        } else {
+            item.classList.add('AddOn2');
+        }
+    });
+}
+
+
+function addNewItem(content, value) {
+    const addOnDetail = document.getElementById('addOnDetail');
+    const existingOptions = addOnDetail.querySelectorAll('.addon-item');
+    let optionExists = false;
+
+    existingOptions.forEach(option => {
+        if (option.getAttribute('data-value') === value) {
+            optionExists = true;
+        }
+    });
+
+    if (!optionExists) {
+        // Create a new div for the add-on option
+        const newOptionDiv = document.createElement('div');
+        newOptionDiv.classList.add('col-md-6', 'AddOn', 'addon-item');
+        newOptionDiv.setAttribute('data-value', value);
+        newOptionDiv.textContent = content;
+
+        // Add a delete button without extra classes
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '刪除';
+        deleteButton.classList.add('btn-delete');
+        deleteButton.setAttribute('type', 'button');
+        deleteButton.addEventListener('click', function () {
+            newOptionDiv.remove();
+            updateAddonClasses();  // Update classes after deletion
+        });
+
+        // Append the delete button to the new div
+        newOptionDiv.appendChild(deleteButton);
+
+        // Append the new div to addOnDetail
+        addOnDetail.appendChild(newOptionDiv);
+
+        // Update the classes for odd/even after adding
+        updateAddonClasses();
+    } else {
+        alert('此選項已存在!');
+    }
+};

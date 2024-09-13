@@ -1,5 +1,5 @@
 {"OrderList":[
     {"OrderId":1, "OrderTime":"2024/8/25 10:21PM",
     "PickUpTime":"2024/8/2 6:30AM", "TotalPrice":60, 
-    "OrderStatus":"已取餐", "MemberName":"王小明"}
+    "OrderStatus":"已取餐", "MemberName":"王小明", "UsedPoints": 10}
 ]}

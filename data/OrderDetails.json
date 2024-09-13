@@ -1,0 +1,39 @@
+{"OrderDetails":[
+    
+        {   
+            "OrderId": 1, 
+            "OrderItems":[
+                {"Name":"火腿蛋吐司", "Price":25, "Quantity":1, "AddonItems":
+                    [{"AddOnName":"加蛋+15", "AddOnQuantity":1}], "Subtotal":40
+                },
+                {"Name":"火腿蛋餅", "Price":30, "Quantity":1, "AddonItems":
+                    [{"AddOnName":"不醬", "AddOnQuantity":1}], "Subtotal":30
+                },
+                {"Name":"紅茶", "Price":15, "Quantity":1, "AddonItems":
+                    [{"AddOnName":"冰", "AddOnQuantity":1}], "Subtotal":15
+                }
+
+            ]
+            
+
+
+    },
+
+        {
+            "OrderId": 2, 
+            "OrderItems":[
+                {"Name":"火腿蛋吐司", "Price":25, "Quantity":1, "AddonItems":
+                    [{"AddOnName":"加蛋+15", "AddOnQuantity":1}], "Subtotal":40
+                },
+                {"Name":"火腿蛋餅", "Price":30, "Quantity":1, "AddonItems":
+                    [{"AddOnName":"不醬", "AddOnQuantity":1}], "Subtotal":30
+                },
+                {"Name":"紅茶", "Price":15, "Quantity":1, "AddonItems":
+                    [{"AddOnName":"冰", "AddOnQuantity":1}], "Subtotal":15
+                }
+
+            ]
+        }
+    
+]
+}

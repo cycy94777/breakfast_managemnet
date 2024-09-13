@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="jquery-3.7.1.min.js"></script>
     <style>
         body {
             background-color: white;
@@ -95,7 +96,7 @@
         }
 
         .form-check-input:checked {
-            background-color: grey;
+            background-color: grey !important;
             border-color: grey;
         }
 
@@ -131,7 +132,11 @@
             justify-content: center;
             text-align: center;
             width: 20%;
-            height: 70%;
+            height: auto;
+        }
+
+        #addOnbtn {
+            height: auto;
         }
 
         .grid-container {
@@ -158,6 +163,9 @@
        
         .grid-item-right {
             grid-row: span 2;
+            display: grid;
+            /* grid-template-columns: repeat(2, 1fr); Two columns with equal width */
+            gap: 10px; /* Space between items */
         }
 
         .form-check-group {
@@ -180,20 +188,74 @@
             margin-left: 10px;
         }
 
-        #addOnDetail,
-        #description {
+        #addOnDetail
+        {
             width: 100%;
             height: 100%;
         }
 
-        #addOnDetail {
+        /* #addOnDetail {
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content: flex-start; 
+            gap: 10px; Adds a gap between the items */
+        
+            /* #addOnDetail {
+                display: flex;
+                
+            } */
+
+        /* #addOnDetail {
             background-color: #d8d7d7;
+            display: flex;
+            flex-direction: column;
+        }*/
+
+        /* .addon-item {
+            margin: 5px; /* Adjust spacing between items 
+            padding: 10px; /* Space inside each item 
+            border: 1px solid #ddd; Optional: border to visualize items
+        }  */
+       
+
+        #addOnDetail {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+            box-sizing: border-box; 
         }
 
+        .addon-item {
+            width: 30% ;
+            padding: 5px;
+        }
+
+        /*.col-md-6 {
+            flex: 1 1 calc(50% - 10px); /* Each item takes 50% of the width minus the gap */
+            /*box-sizing: border-box; /* Include padding and border in the width calculation */
+        
+
+
+        .AddOn {
+            border: 1px solid rgb(7, 0, 52);
+            border-radius: 5px;
+            margin: 3px;
+            padding:3px;
+            padding-left: 5px;
+            text-align: center;
+            align-items: center;
+        }
+                
+  
         .row {
             margin-left: 0px !important;
             margin-right: 0 !important;
             padding: 0px !important;
+        }
+
+        .grid-item-left img {
+            display: block; /* Ensure the image is displayed as a block element */
+            max-width: 100%; /* Prevent image from overflowing */
+            margin-top: 10px; /* Space above the image */
         }
 
         #upload-img {
@@ -242,6 +304,49 @@
             color:white;
         }
         
+        #upload-img-btn{
+            position: relative; /* or absolute, depending on your layout */
+            left: -10px; /* Adjust the value as needed */
+        }
+
+        #upload-img {
+            padding: 0px;
+            align-items: center;
+            justify-content:center;
+            width: 20%; /* Keep button size consistent */
+            height: auto;
+            margin-top: 0px;
+            position: sticky;
+            top: 0; /* Ensure it remains in place */
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 100%;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .image-preview-container {
+            max-width: 200px;
+            max-height: 150px;
+            margin-top: 10px;
+            display: flex; /* Use flexbox to center the image */
+            align-items: center;
+            justify-content: center;
+            padding-left: 5px;
+            overflow: hidden; /* Hide any overflow */
+            
+        }
+
+        .image-preview-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensure the image fits without stretching */
+        }
+
+
+        
     </style>
 </head>
 
@@ -275,22 +380,23 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="addOnName" class="col-form-label form-label-custom">商品名稱:<span class="required">*</span></label>
-                                <input type="text" class="form-control" id="addOnName" style="width: auto;" placeholder="火腿蛋吐司">
+                                <input type="text" class="form-control" id="addOnName" style="width: auto;" placeholder="火腿蛋吐司" value="火腿蛋吐司">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="addOnPrice" class="col-form-label form-label-custom">商品價錢:<span class="required">*</span></label>
-                                <input type="text" class="form-control" id="addOnPrice" style="width: auto;" placeholder="25">
+                                <input type="text" class="form-control" id="addOnPrice" style="width: auto;" placeholder="25" value="25">
                             </div>
                             <div class="dropdown-group col-md-6">
-                                <label for="dropdownMenu" class="col-form-label form-label-custom">加選類別:</label>
-                                <select id="dropdownMenu" class="form-select select-category" aria-label="Default select example">
+                                <label for="dropdownMenu2" class="col-form-label form-label-custom">加選類別:</label>
+                                <select id="dropdownMenu2" class="form-select select-category" aria-label="Default select example">
                                     <option selected>請選擇</option>
                                     <option value="1">吐司調味</option>
                                     <option value="2">飲料溫度</option>
+                                    <option value="3">餐點加料</option>
                                 </select>
-                                <button class="btn btn-secondary btn-add" id="addOnbtn">新增</button>
+                                <button class="btn btn-secondary btn-add" id="addOnbtn" type="button">新增</button>
                             </div>
                         </div>
 
@@ -308,36 +414,170 @@
                             </div>
 
                             <div class="grid-item-right">
-                                <div id="addOnDetail" class="form-control" rows="2">
-                                    <row>
-                                        <div class="col-md-6 AddOn AddOn1">餐點加料 <button class="btn-delete">刪除</button></div>
-                                        <div class="col-md-6 AddOn AddOn2">吐司調味 <button class="btn-delete">刪除</button></div>
-                                    </row>
+                                <div id="addOnDetail" class="form-control d-flex flex-wrap" rows="2">
+                                   
+                                        <div class="col-md-6 AddOn AddOn1 addon-item" data-value="3">餐點加料 <button class="btn-delete" type="button">刪除</button></div>
+                                        <div class="col-md-6 AddOn AddOn2 addon-item" data-value="1">吐司調味 <button class="btn-delete" type="button">刪除</button></div>
+                                   
                                 </div>
                             </div>
 
                             <div class="grid-item-left">
-                                <label for="upload-img" class="form-check-label me-3 form-label-custom">上傳圖片:</label>
-                                <button id="upload-img" class="btn btn-secondary btn-add">上傳</button>
+                                <label for="upload-img"  class="form-check-label form-label-custom">上傳圖片:</label>
+                                <button id="upload-img-btn" class="btn btn-secondary btn-add" type="button">上傳</button>
+                                <input type="file" id="upload-img" class="d-none" accept="image/*"> <!-- Hidden file input -->
+                                <!-- <div class="image-preview-container">
+                                    Image preview will be added here
+                                </div> -->
                             </div>
 
-                            <div></div> <!-- Empty grid item -->
+                            <!-- <div></div> Empty grid item -->
+                        </div>
+                        <div class="image-preview-container">
+                            <!-- Image preview will be added here -->
                         </div>
 
-                        <div class="description-box">
-                            <label 
-                            class="form-label-custom label-detail">商品詳細說明:</label>
-                            <textarea id="description" class="form-control form-container" rows="4" placeholder="美味火腿與新鮮蛋的結合">美味火腿與新鮮蛋的結合</textarea>
-                        </div>
+                        
                     </form>
                 </div>
                 <div class="modal-footer">
                     
-                    <button type="button" class="btn btn-secondary btn-save" data-bs-dismiss="modal">儲存</button>
+                    <button type="button" class="btn btn-secondary btn-save mt-3" data-bs-dismiss="modal">儲存</button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        //  // Add event listeners to pre-existing delete buttons
+        //  document.querySelectorAll('.btn-delete').forEach(button => {
+        //     button.addEventListener('click', function () {
+        //         // Remove the parent div when delete is clicked
+        //         this.parentElement.remove();
+        //         updateAddonClasses();  // Update classes after deletion
+        //     });
+        // });
+        // Add event listeners to pre-existing delete buttons
+        $(document).ready(function() {
+            console.log('Document ready');
+            // 使用事件委託處理動態添加的按鈕
+            $(document).on('click', '.btn-delete', function() {
+                console.log('Delete button clicked'); // 確認按鈕被點擊
+                console.log('Parent element:', $(this).parent()); // 確認要移除的父元素
+
+                $(this).parent().remove(); // 移除父元素
+                console.log('Parent element removed'); // 確認已經移除
+
+                updateAddonClasses();  // 更新類別
+                console.log('Addon classes updated'); // 確認更新
+            });
+        });
+
+         // Function to add a new item
+        function addNewItem(content, value) {
+            const addOnDetail = document.getElementById('addOnDetail');
+            const existingOptions = addOnDetail.querySelectorAll('.addon-item');
+            let optionExists = false;
+
+            existingOptions.forEach(option => {
+                if (option.getAttribute('data-value') === value) {
+                    optionExists = true;
+                }
+            });
+
+            if (!optionExists) {
+                // Create a new div for the add-on option
+                const newOptionDiv = document.createElement('div');
+                newOptionDiv.classList.add('col-md-6', 'AddOn', 'addon-item');
+                newOptionDiv.setAttribute('data-value', value);
+                newOptionDiv.textContent = content;
+
+                // Add a delete button without extra classes
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '刪除';
+                deleteButton.classList.add('btn-delete');
+                deleteButton.setAttribute('type', 'button');
+                deleteButton.addEventListener('click', function () {
+                    newOptionDiv.remove();
+                    updateAddonClasses();  // Update classes after deletion
+                });
+
+                // Append the delete button to the new div
+                newOptionDiv.appendChild(deleteButton);
+
+                // Append the new div to addOnDetail
+                addOnDetail.appendChild(newOptionDiv);
+
+                // Update the classes for odd/even after adding
+                updateAddonClasses();
+            } else {
+                alert('此選項已存在!');
+            }
+        };
+
+    // Adding new options via the "新增" button
+    document.getElementById('addOnbtn').addEventListener('click', function () {
+        const dropdown = document.getElementById('dropdownMenu2');
+        const selectedOptionText = dropdown.options[dropdown.selectedIndex].text;
+        const selectedOptionValue = dropdown.value;
+
+        if (selectedOptionValue === "請選擇") {
+            alert('請先選擇加選類別!');
+            return;
+        }
+
+        // Call the addNewItem function
+        addNewItem(selectedOptionText, selectedOptionValue);
+    });
+
+    // Function to update AddOn1/AddOn2 class for odd/even components
+    function updateAddonClasses() {
+        const addonItems = document.querySelectorAll('.addon-item');
+        addonItems.forEach((item, index) => {
+            item.classList.remove('AddOn1', 'AddOn2');
+            if (index % 2 === 0) {
+                item.classList.add('AddOn1');
+            } else {
+                item.classList.add('AddOn2');
+            }
+        });
+    }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+        // Handle file input click
+        document.getElementById('upload-img-btn').addEventListener('click', function () {
+            document.getElementById('upload-img').click(); // Trigger the file input click
+        });
+
+        // File input change event to handle the selected file
+        document.getElementById('upload-img').addEventListener('change', function (event) {
+            const file = event.target.files[0]; // Get the selected file
+            const previewContainer = document.querySelector('.image-preview-container'); // Make sure this container is separate and doesn't overlap with other content
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    // Clear any existing image previews
+                    previewContainer.innerHTML = ''; 
+
+                    // Create a new image element and set its source to the file data URL
+                    const imgPreview = document.createElement('img');
+                    imgPreview.src = e.target.result;
+                    imgPreview.style.maxWidth = '100%'; // Ensure the image fits within its container
+                    imgPreview.style.marginTop = '10px'; // Space above the image
+
+                    // Append the new image to the container
+                    previewContainer.appendChild(imgPreview);
+                };
+                reader.readAsDataURL(file); // Read the file as a data URL
+            }
+        });
+    });
+
+
+        // Call the function to update the classes when the page loads
+        updateAddonClasses();
+    </script>
 </body>
 
 </html>
