@@ -147,7 +147,7 @@ function loadOperationGraph() {
                 </style>
             `;
 
-            // 等待 DOM 加载完成后初始化图表
+            // 等待 DOM 加載完成後初始化圖表
             initSalesChart(data);
             initMembersChart(data);
             initProductsTable(data);

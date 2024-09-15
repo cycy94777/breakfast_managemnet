@@ -96,7 +96,7 @@
         }
 
         .form-check-input:checked {
-            background-color: grey;
+            background-color: grey !important;
             border-color: grey;
         }
 
@@ -132,7 +132,8 @@
             justify-content: center;
             text-align: center;
             width: 20%;
-            height: 70%;
+            /* height: 70%; */
+            height: auto;
         }
 
         .grid-container {
@@ -159,6 +160,45 @@
        
         .grid-item-right {
             grid-row: span 2;
+            display: grid;
+            /* grid-template-columns: repeat(2, 1fr); Two columns with equal width */
+            gap: 10px; /* Space between items */
+        }
+
+        #addOnDetail {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+            box-sizing: border-box; 
+        }
+
+        .addon-item {
+            width: 30% ;
+            padding: 5px;
+        }
+
+        .AddOn {
+            border: 1px solid rgb(7, 0, 52);
+            border-radius: 5px;
+            margin: 3px;
+            padding:3px;
+            padding-left: 5px;
+            text-align: center;
+            align-items: center;
+        }
+
+        .AddOn1 {
+            background-color: green;
+            color:white;
+        }
+
+        .AddOn2 {
+            background-color: rgb(22, 39, 84);
+            color:white;
+        }
+
+        .btn-delete {
+            font-size: 12px;
+            border-radius: 5px;
         }
 
         .form-check-group {
@@ -193,6 +233,11 @@
             padding: 0px !important;
         }
 
+        #upload-img-btn{
+            position: relative; /* or absolute, depending on your layout */
+            left: -10px; /* Adjust the value as needed */
+        }
+        
         #upload-img {
             padding: 0px;
             align-items: center;
@@ -206,9 +251,9 @@
             padding: 10px;
         } */
 
-        .description-box {
+        /* .description-box {
             padding: 10px;
-        }
+        } */
 
         .select-category {
             width:45%;
@@ -216,6 +261,24 @@
 
         h3{
             font-weight: bolder;
+        }
+
+        .image-preview-container {
+            max-width: 200px;
+            max-height: 150px;
+            margin-top: 10px;
+            display: flex; /* Use flexbox to center the image */
+            align-items: center;
+            justify-content: center;
+            padding-left: 5px;
+            overflow: hidden; /* Hide any overflow */
+            
+        }
+
+        .image-preview-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensure the image fits without stretching */
         }
 
         
@@ -261,13 +324,14 @@
                                 <input type="text" class="form-control" id="addOnPrice" style="width: auto;">
                             </div>
                             <div class="dropdown-group col-md-6">
-                                <label for="dropdownMenu" class="col-form-label form-label-custom">加選類別:</label>
-                                <select id="dropdownMenu" class="form-select select-category" aria-label="Default select example">
+                                <label for="dropdownMenu2" class="col-form-label form-label-custom">加選類別:</label>
+                                <select id="dropdownMenu2" class="form-select select-category" aria-label="Default select example">
                                     <option selected>請選擇</option>
                                     <option value="1">吐司調味</option>
                                     <option value="2">飲料溫度</option>
+                                    <option value="3">餐點加料</option>
                                 </select>
-                                <button class="btn btn-secondary btn-add" id="addOnbtn">新增</button>
+                                <button class="btn btn-secondary btn-add" id="addOnbtn" type="button">新增</button>
                             </div>
                         </div>
 
@@ -283,23 +347,30 @@
                                     <label class="form-check-label form-label-custom" for="inlineRadio2">否</label>
                                 </div>
                             </div>
-
+                            <!-- 顯示已選取的加選類別 -->
                             <div class="grid-item-right">
-                                <div id="addOnDetail" class="form-control" rows="2"></div>
+                                <div id="addOnDetail" class="form-control d-flex flex-wrap" rows="2">
+
+                                </div>
                             </div>
 
                             <div class="grid-item-left">
                                 <label for="upload-img" class="form-check-label me-3 form-label-custom">上傳圖片:</label>
-                                <button id="upload-img" class="btn btn-secondary btn-add">上傳</button>
+                                <button id="upload-img-btn" class="btn btn-secondary btn-add" type="button">上傳</button>
+                                <input type="file" id="upload-img" class="d-none" accept="image/*"> <!-- Hidden file input -->
                             </div>
 
-                            <div></div> <!-- Empty grid item -->
+                            <!-- <div></div> Empty grid item -->
+                        </div>
+                        <!-- 預覽圖片的區域 -->
+                        <div class="image-preview-container">
+                            <!-- Image preview will be added here -->
                         </div>
 
-                        <div class="description-box">
+                        <!-- <div class="description-box">
                             <label class="form-label-custom label-detail">商品詳細說明：</label>
                             <textarea id="description" class="form-control form-container" rows="4"></textarea>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
                 <div class="modal-footer">

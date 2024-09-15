@@ -74,12 +74,13 @@
         .form-check-label{
             font-weight: bold;
         }
+
         .form-check {
             margin-right: 10px; /* Space between radio options */
         }
 
         .form-check-input:checked {
-            background-color: grey; /* Change the background color of the checked radio button */
+            background-color: grey !important; /* Change the background color of the checked radio button */
             border-color: grey; /* Change the border color of the checked radio button */
         }
 
@@ -101,6 +102,58 @@
         .required{
             color:red;
         }
+
+        #upload-img-btn{
+           
+           position: relative; /* or absolute, depending on your layout */
+           left: -10px; /* Adjust the value as needed */
+           height: 30px;
+           font-size: 14px;
+           /* max-height: 50%;
+           max-height: 30px; */
+           text-align: center;
+           /* align-items: center;
+           justify-content: center; */
+           display: flex; /* Enable flexbox */
+           align-items: center; /* Center content vertically */
+           justify-content: center; /* Center content horizontally */
+       }
+
+       #upload-img {
+           padding: 0px;
+           align-items: center;
+           justify-content:center;
+           width: 20%; /* Keep button size consistent */
+           height: auto;
+           margin-top: 0px;
+           position: sticky;
+           top: 0; /* Ensure it remains in place */
+       }
+
+       .image-preview {
+           max-width: 100%;
+           max-height: 100%;
+           margin-top: 10px;
+           display: none;
+       }
+
+       .image-preview-container {
+           max-width: 200px;
+           max-height: 150px;
+           margin-top: 10px;
+           display: flex; /* Use flexbox to center the image */
+           align-items: center;
+           justify-content: center;
+           padding-left: 5px;
+           overflow: hidden; /* Hide any overflow */
+           
+       }
+
+       .image-preview-container img {
+           max-width: 100%;
+           max-height: 100%;
+           object-fit: contain; /* Ensure the image fits without stretching */
+       }
     </style>
 </head>
 <body>
@@ -127,6 +180,17 @@
                         <div class="form-group">
                             <label for="addOnName" class="col-form-label form-label-custom">商品類別名稱:<span class="required">*</span></label>
                             <input type="text" class="form-control" id="addOnName" style="width: auto;" placeholder="吐司類">
+                        </div>
+                        
+                        <div id="img-container">
+                            <div class="form-group">
+                                <label class="col-form-label form-label-custom" for="upload-img">上傳圖片：</label>
+                                <button id="upload-img-btn" class="btn btn-secondary btn-add" type="button">上傳</button>
+                                <input type="file" id="upload-img" class="d-none" accept="image/*"> <!-- Hidden file input -->
+                                <div class="image-preview-container">
+                                    <!-- Image preview will be added here -->
+                                </div> 
+                            </div>
                         </div>
                     </form>
                 </div>

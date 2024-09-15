@@ -314,16 +314,20 @@ function loadProductCategories() {
                     <i class="fa-solid fa-pen-to-square"></i>
                 修改
                 </a>
-                <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
+                <a class="btn btn-light delete-row-btn" style="color:#A9A9A9" href="#!" role="button">
                 <i class="fa-solid fa-trash"></i>
                 刪除
-                </a>`;
+                </a>`
 
                 row.appendChild(categoryName);
                 row.appendChild(operate);
 
                 tbody.appendChild(row);
             });
+
+            // After the products are loaded, call deleteRow to set up the event listener
+            deleteRow();
+
             // Add event listeners to all "edit" buttons
             document.querySelectorAll('.edit-btn').forEach((btn, index) => {
                 btn.addEventListener('click', function() {
@@ -331,6 +335,15 @@ function loadProductCategories() {
                     loadModal('ModifyProductCategory.html', 'staticBackdrop');
                 });
             });
+
+             // Add event listeners to all "delete" buttons
+            //  document.querySelectorAll('.delete-btn').forEach(btn => {
+            //     btn.addEventListener('click', function() {
+            //         // 找到被點擊按鈕所在的表格行，並將其移除
+            //         const row = btn.closest('tr');
+            //         row.remove(); // 移除表格行
+            //     });
+            // });
 
         })
         .catch(error => {
@@ -405,6 +418,8 @@ function loadProducts(){
             </nav>
         </div>`;
 
+        //綁定事件
+
         // Add event listener to the button
         document.getElementById('showModalBtn').addEventListener('click', function() {
             loadModal('AddProductM.html', 'staticBackdrop');
@@ -433,7 +448,7 @@ function loadProducts(){
                 <i class="fa-solid fa-pen-to-square"></i>
             
             </a>
-            <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
+            <a class="btn btn-light delete-row-btn" style="color:#A9A9A9" href="#!" role="button">
             <i class="fa-solid fa-trash"></i>
             
             </a>`;
@@ -450,6 +465,10 @@ function loadProducts(){
             tbody.appendChild(row);
             
         });
+
+        // After the products are loaded, call deleteRow to set up the event listener
+        deleteRow();
+
         // Add event listeners to all "edit" buttons
         document.querySelectorAll('.edit-btn').forEach((btn, index) => {
             btn.addEventListener('click', function() {
@@ -547,7 +566,7 @@ function loadAddOnCategories(){
                 <i class="fa-solid fa-pen-to-square"></i>
             修改
             </a>
-            <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
+            <a class="btn btn-light delete-row-btn" style="color:#A9A9A9" href="#!" role="button">
             <i class="fa-solid fa-trash"></i>
             刪除
             </a>`;
@@ -559,6 +578,9 @@ function loadAddOnCategories(){
             tbody.appendChild(row);
         });
 
+        // After the products are loaded, call deleteRow to set up the event listener
+        deleteRow();
+
         // Add event listeners to all "edit" buttons
         document.querySelectorAll('.edit-btn').forEach((btn, index) => {
             btn.addEventListener('click', function() {
@@ -566,6 +588,9 @@ function loadAddOnCategories(){
                 loadModal('ModifyAddOnCategoryM.html', 'staticBackdrop');
             });
         });
+
+        // 註冊上傳圖片按鈕事件
+        uploadImg();
     
     })
     .catch(error => {
@@ -660,7 +685,7 @@ function loadAddOnOptions() {
                     <i class="fa-solid fa-pen-to-square"></i>
                 修改
                 </a>
-                <a class="btn btn-light" style="color:#A9A9A9" href="#!" role="button">
+                <a class="btn btn-light delete-row-btn" style="color:#A9A9A9" href="#!" role="button">
                 <i class="fa-solid fa-trash"></i>
                 刪除
                 </a>`;
@@ -672,6 +697,9 @@ function loadAddOnOptions() {
 
                 tbody.appendChild(row);
             });
+
+            // After the products are loaded, call deleteRow to set up the event listener
+            deleteRow();
 
             // Add event listeners to all "edit" buttons
             document.querySelectorAll('.edit-btn').forEach((btn, index) => {
@@ -884,7 +912,7 @@ function loadBlackList() {
             
             // Add button HTML
             operate.innerHTML = `
-                <a class="btn btn-light" style="color:#A9A9A9; width: 80px; height: 30px; font-size: 12px; padding: 0; border: none; display: inline-flex; align-items: center; justify-content: center;" href="#!" role="button">
+                <a class="btn btn-light delete-row-btn" style="color:#A9A9A9; width: 80px; height: 30px; font-size: 12px; padding: 0; border: none; display: inline-flex; align-items: center; justify-content: center;" href="#!" role="button">
                     <i class="fa-solid fa-pen-to-square" style="font-size: 10px; margin-right: 3px;"></i>
                     解除封鎖
                 </a>`;
@@ -897,6 +925,7 @@ function loadBlackList() {
 
             tbody.appendChild(row);
         });
+        deleteRow();
 
         // 補充空行
         const currentRowCount = data.BlackList.length;
@@ -1487,7 +1516,8 @@ function loadOrderList() {
     });
 }
 
-// a function for loading modal content:
+// a function for loading modal content: 
+// 載入的modal的功能
 function loadModal(url, modalId) {
     fetch(url)
         .then(response => response.text())
@@ -1502,7 +1532,7 @@ function loadModal(url, modalId) {
         .catch(error => console.error('Error loading modal:', error));
 }
 
-
+// 綁定modal裡的事件
 function bindModalEvents(){
     $(document).on('click', '.btn-delete', function() {
         console.log('Delete button clicked'); // 確認按鈕被點擊
@@ -1568,6 +1598,7 @@ function bindModalEvents(){
     
 }
 
+//根據排列賦予對應 addOn class
 function updateAddonClasses() {
     const addonItems = document.querySelectorAll('.addon-item');
     addonItems.forEach((item, index) => {
@@ -1580,7 +1611,7 @@ function updateAddonClasses() {
     });
 }
 
-
+// 將所選取的加選類別加到addOnDetail
 function addNewItem(content, value) {
     const addOnDetail = document.getElementById('addOnDetail');
     const existingOptions = addOnDetail.querySelectorAll('.addon-item');
@@ -1621,3 +1652,45 @@ function addNewItem(content, value) {
         alert('此選項已存在!');
     }
 };
+
+// 刪除table row
+function deleteRow(){
+   // Use event delegation to listen for click events on .delete-row-btn
+   $(document).on('click', '.delete-row-btn', function() {
+    // 找到被點擊按鈕所在的表格行，並將其移除
+    const row = $(this).closest('tr'); // Use $(this) to refer to the clicked button
+    row.remove(); // 移除表格行
+});
+}
+
+//上傳圖片
+function uploadImg(){
+    $(document).on('click', '#upload-img-btn', function() {
+        $('#upload-img').click(); // 觸發文件輸入點擊
+    });
+
+    // 文件輸入變更事件處理選擇的文件
+    $('#upload-img').on('change', function(event) {
+        const file = event.target.files[0]; // 獲取選擇的文件
+        const previewContainer = $('.image-preview-container'); // 確保這個容器是分開的，不會與其他內容重疊
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // 清除任何現有的圖像預覽
+                previewContainer.empty(); 
+
+                // 創建新的圖像元素並設置其源為文件數據 URL
+                const imgPreview = $('<img>').attr('src', e.target.result)
+                                             .css({
+                                                'max-width': '100%', // 確保圖像適合其容器
+                                                'margin-top': '10px'  // 圖像上方的空間
+                                             });
+
+                // 將新圖像添加到容器中
+                previewContainer.append(imgPreview);
+            };
+            reader.readAsDataURL(file); // 將文件讀取為數據 URL
+        }
+    });
+}
