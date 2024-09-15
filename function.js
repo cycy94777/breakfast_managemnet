@@ -52,9 +52,27 @@ function loadPendingOrders() {
             totalAmount.innerHTML = `總金額：
             <span style="background-color: #DCD9D8; color: red;"> ${order.總金額} </span>`;
 
+            const orderStatus = document.createElement('div');
+            orderStatus.classList.add('col');
+            orderStatus.innerHTML = `
+                <div>
+                    <form class="dropdown-group" style="display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+                        <label for="dropdownMenu2" class="col-form-label form-label-custom" style="margin-right: 5px; white-space: nowrap;">訂單狀態:</label>
+                        <select id="dropdownMenu2" class="form-select select-category" style="width: 140px; width: 120px; max-width: 70%;">
+                            <option value="1" selected>處理中</option>
+                            <option value="2">取消訂單</option>
+                            <option value="3">被取消</option>
+                            <option value="4">已完成</option>
+                        </select>
+                        <button class="btn btn-sm btn-danger btn-add" id="addOnbtn" type="button" style="padding: 6px 12px; white-space: nowrap;">確認</button>
+                    </form>
+                </div>
+            `;
+
             orderDetails.appendChild(pickupId);
             orderDetails.appendChild(memberId);
             orderDetails.appendChild(totalAmount);
+            orderDetails.appendChild(orderStatus);
 
             // Create a table for the order items
             const table = document.createElement('table');
@@ -325,6 +343,7 @@ function loadProductCategories() {
                 tbody.appendChild(row);
             });
 
+            // uploadImg();
             // After the products are loaded, call deleteRow to set up the event listener
             deleteRow();
 
@@ -466,6 +485,8 @@ function loadProducts(){
             
         });
 
+        // uploadImg();
+
         // After the products are loaded, call deleteRow to set up the event listener
         deleteRow();
 
@@ -590,7 +611,7 @@ function loadAddOnCategories(){
         });
 
         // 註冊上傳圖片按鈕事件
-        uploadImg();
+        // uploadImg();
     
     })
     .catch(error => {
@@ -1029,10 +1050,10 @@ function loadPointsDetails(){
                 tbody.appendChild(row);
             });
             // 補充空行
-            const currentRowCount = data.MemberDetails.length;
+            const currentRowCount = data.PointsDetails.length;
             for (let i = currentRowCount; i < maxRows; i++) {
                 const emptyRow = document.createElement('tr');
-                for (let j = 0; j < 5; j++) {
+                for (let j = 0; j < 3; j++) {
                     const emptyCell = document.createElement('td');
                     emptyCell.innerHTML = "&nbsp;"; // 使用不間斷空格來佔位
                     emptyRow.appendChild(emptyCell);
@@ -1664,21 +1685,23 @@ function deleteRow(){
 }
 
 //上傳圖片
-function uploadImg(){
+function uploadImg() {
+    // 先移除已存在的事件處理程序，以避免重複綁定
+    $(document).off('click', '#upload-img-btn');
+    
     $(document).on('click', '#upload-img-btn', function() {
         $('#upload-img').click(); // 觸發文件輸入點擊
     });
 
-    // 文件輸入變更事件處理選擇的文件
-    $('#upload-img').on('change', function(event) {
+    $('#upload-img').off('change').one('change', function(event) {
         const file = event.target.files[0]; // 獲取選擇的文件
-        const previewContainer = $('.image-preview-container'); // 確保這個容器是分開的，不會與其他內容重疊
+        const previewContainer = $('.image-preview-container'); // 圖像預覽容器
 
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 // 清除任何現有的圖像預覽
-                previewContainer.empty(); 
+                previewContainer.empty();
 
                 // 創建新的圖像元素並設置其源為文件數據 URL
                 const imgPreview = $('<img>').attr('src', e.target.result)
@@ -1691,6 +1714,11 @@ function uploadImg(){
                 previewContainer.append(imgPreview);
             };
             reader.readAsDataURL(file); // 將文件讀取為數據 URL
+        } else {
+            // 若沒有選擇文件，清除圖像預覽
+            previewContainer.empty();
         }
     });
 }
+
+
